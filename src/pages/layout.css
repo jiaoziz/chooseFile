@@ -1,0 +1,13 @@
+.contentClass {
+    width: 100%;
+   min-height: 95vh;
+
+}
+
+.contentClass .contentCard {
+    min-height: 800px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #ccc;
+    padding: 20px;
+    background-color: white;
+}

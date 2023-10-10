@@ -1,0 +1,66 @@
+.tree {
+    min-width: 150px;
+    overflow: scroll;
+    background: rgb(24, 24, 24);
+    /* height: 100%; */
+    width: auto;
+    color: #fff;
+    border-radius: 0;
+    padding: 10px;
+    min-height: 100%;
+}
+
+.tree::-webkit-scrollbar {
+    width: 3px;
+    background-color: red;
+}
+
+.tree::-webkit-scrollbar-thumb {
+    height: 3px;
+    background-color: rgb(7, 7, 7);
+    border-radius: 3px;
+}
+
+.tree::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+}
+
+.tree::-webkit-scrollbar-track {
+    background-color: aqua;
+}
+
+.tree::-webkit-scrollbar-track-piece {
+    background-color:rgb(24, 24, 24);
+}
+
+.tree::-webkit-scrollbar-corner  {
+    background-color: rgb(24, 24, 24);
+}
+
+.box {
+    display: flex;
+    margin-top: 30px;
+    font-size: 16px;
+    height: 600px;
+}
+
+.box .textMain {
+    min-width: 300px;
+    min-height: 100%;
+    max-height: 100%;
+    padding: 10px;
+    background: rgb(31, 31, 31);
+    color: #fff;
+    border-radius: 0;
+    outline:none;
+}
+
+.box .textMain::-webkit-resizer {
+    display: none;
+}
+
+.box .pre {
+    overflow-y: scroll;
+    margin:  0;
+}
