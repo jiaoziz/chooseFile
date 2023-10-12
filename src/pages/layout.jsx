@@ -10,10 +10,13 @@ import { Layout, Menu, Button, Spin } from 'antd';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import About from './about.jsx'
 import { getData } from '../toolkit/store'
 import { useDispatch, useSelector } from 'react-redux';
+
+import About from './about.jsx'
 import ChooseFile from './chooseFile/chooseFile.jsx'
+import Worker from './testWorker/Worker.jsx'
+
 import './layout.css'
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -53,6 +56,12 @@ const menuItemsArr = [
         icon: CloudOutlined,
         path: '/chooseFile',
         label: 'choose转为html文件'
+    },
+    {
+        permission: ['admin', 'user'],
+        icon: CloudOutlined,
+        path: '/testWorker',
+        label: 'testWorker'
     },
     {
         permission: [],
@@ -135,6 +144,7 @@ const AppLayout = (props) => {
                                         <Route path="/about1" element={<About1 />} />
                                         <Route path="/app" element={<App />} />
                                         <Route path="/chooseFile" element={<ChooseFile />} />
+                                        <Route path="/testWorker" element={<Worker />} />
                                         <Route path="/" element={<Home />} />
                                     </Routes>
                                 </div>

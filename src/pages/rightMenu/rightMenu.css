@@ -1,0 +1,35 @@
+.menuBox {
+    width: auto;
+    height: auto;
+    background-color: rgb(31, 31, 31);
+    text-align: center;
+    position: fixed;
+    z-index: 10;
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+}
+
+.menuItem {
+    padding: 3px;
+    width: auto;
+}
+
+.menuItem:hover {
+    background-color: rgb(4, 57, 94);
+    border-radius: 5px;
+}
+
+.formFooter {
+    width: 100%;
+    text-align: center;
+}
+
+.formFooter .finshBtn {
+    margin-right: 50px;
+}
+
+.formBox {
+    padding: 20px;
+
+}
