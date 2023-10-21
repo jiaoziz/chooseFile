@@ -180,7 +180,6 @@ const Jtkf = (props) => {
             type: 'jtkf/copyAppointmentTime',
             payload: ''
         })
-
         getCompany()
     }, [])
 
