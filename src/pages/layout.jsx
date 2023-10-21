@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import About from './about.jsx'
 import ChooseFile from './chooseFile/chooseFile.jsx'
 import Worker from './testWorker/Worker.jsx'
+import Jtkf from './jtkf/Jtkf.jsx'
 
 import './layout.css'
 
@@ -56,6 +57,12 @@ const menuItemsArr = [
         icon: CloudOutlined,
         path: '/chooseFile',
         label: 'choose转为html文件'
+    },    
+    {
+        permission: ['admin', 'user'],
+        icon: CloudOutlined,
+        path: '/jtkf',
+        label: '客服系统'
     },
     {
         permission: ['admin', 'user'],
@@ -84,7 +91,7 @@ const AppLayout = (props) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    console.log('state', state);
+    // console.log('state', state);
 
     const cilckMenuItem = ({ key }) => {
         navigate(`${key}`)
@@ -96,7 +103,7 @@ const AppLayout = (props) => {
 
     // 切换角色
     const changeRole = (type)=>{
-        localStorage.setItem('p', type)
+        // localStorage.setItem('p', type)
         dispatch({ type: 'menu/add', payload: [] })
         dispatch(getData(menuItemsArr))
     }
@@ -145,6 +152,7 @@ const AppLayout = (props) => {
                                         <Route path="/app" element={<App />} />
                                         <Route path="/chooseFile" element={<ChooseFile />} />
                                         <Route path="/testWorker" element={<Worker />} />
+                                        <Route path="/jtkf" element={<Jtkf />} />
                                         <Route path="/" element={<Home />} />
                                     </Routes>
                                 </div>

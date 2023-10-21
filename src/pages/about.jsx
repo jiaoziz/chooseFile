@@ -12,11 +12,46 @@ const arr = [
 ]
 
 const arr1 = [
-    { label: 'span1', id: 10 },
-    { label: 'span2', id: 11 },
-    { label: 'span3', id: 12 },
-    { label: 'span4', id: 13 },
+    { label: 'span1', value: '' },
+    { label: 'span2', value: '' },
 ]
+
+const C = () => {
+    const [newArr, setNewArr] = useState([[...arr1]])
+    const change =(e, index, i) => {
+        const value = e.target.value
+        const new222 = JSON.parse(JSON.stringify(newArr))
+        new222[index][i].value = value
+        setNewArr(new222)
+    }
+    const add = (type, index) => {
+        if(type === 'add') {
+            setNewArr((newArr)=>[...newArr, [...arr1]])
+        } else {
+            const new11 = JSON.parse(JSON.stringify(newArr))
+            new11.splice(index, 1)
+            setNewArr(new11) 
+        }
+    }
+    return <>
+        <Button onClick={()=>add('add')}>加</Button>
+        {
+            newArr.map((item, index) => {
+                return <div key={index}>
+                    {
+                        item.map((ele, i) => {
+                            return <div key={index + i}>
+                                <input type="text" value={ele.value} onChange={(e)=>change(e, index, i)} />
+                            </div>
+                        })
+                    }
+                    <Button onClick={()=>add('jian', index)}>减</Button>
+                </div>
+            })
+        }
+
+    </>
+}
 
 
 const A = (props) => {
@@ -105,6 +140,7 @@ const About = () => {
     }
 
     return <div>
+        <C></C>
         <Button onClick={add}>点击value + 2</Button>
         <div>关于{value}</div>
         <Button onClick={addData}>点击添加一条</Button>

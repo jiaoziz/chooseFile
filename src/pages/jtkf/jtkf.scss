@@ -1,0 +1,83 @@
+
+
+    .star {
+        display: flex;
+    }
+
+    .row {
+        width: 100%;
+        flex-wrap: wrap;
+        border: #cccccc77 solid 1px;
+        margin-bottom: 2px;
+        align-items: center;
+        display: flex;
+        flex-grow: unset;
+        padding: 10px 20px;
+
+        & .ant-form-item {
+            padding: 5px;
+        }
+
+        & .ant-form-item-label {
+            display: flex;
+            align-items: center;
+        }
+
+        & .ant-form-item-has-error {
+            margin-bottom: 0 !important;
+        }
+        & .ant-row .ant-row > .ant-form-item-control>div:not(.ant-form-item-control-input) {
+            display: none !important;
+        }
+    }
+
+    .noTopBorder {
+        border-top: none;
+        margin-top: -2px;
+    }
+
+    .noBottomBorder {
+        border-bottom: none;
+    }
+
+    .addText {
+        width: 100%;
+
+        .addBtn {
+            display: inline-block;
+            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+            line-height: 16px;
+            text-align: center;
+            border: 1px solid rgb(26, 145, 155);
+            color: rgb(26, 145, 155);
+            border-radius: 50%;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .deleteBtn {
+        display: inline-block;
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        line-height: 16px;
+        text-align: center;
+        border: 1px solid rgba(255, 0, 0, 0.749);
+        color: red;
+        border-radius: 50%;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .listItem {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }

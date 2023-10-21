@@ -29,8 +29,7 @@ const RightMenu = (props) => {
 
     // 存储不影响视图更新的信息
     const comData = useRef({
-           params: { key: '', title, parentNodeDetail, isDirectory, selfNodeDetail, newTitle: '' },
-
+        params: { key: '', title, parentNodeDetail, isDirectory, selfNodeDetail, newTitle: '' },
     })
 
     worker.onmessage = (e) => {

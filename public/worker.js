@@ -1,3 +1,7 @@
+const log = (data, color = 'rgba(255, 0, 0, .3)') => {
+	console.log(`%c ${data}`, `background: ${color}`)
+}
+
 // 接受主线程传来的参数
 self.addEventListener('message', async (e) => {
 	const { type, data } = e.data
@@ -93,7 +97,7 @@ const creatTreeFun = async (data) => {
 					selfNodeDetail: value,
 				})
 			}
-			if (value.kind == 'file') {
+			if (value.kind == 'file' && key.indexOf('.crswap') === -1) {
 				arr.push({
 					title: key,
 					key: lv + key,
@@ -121,10 +125,35 @@ const clickMenuItem = async (data) => {
 			// 创建子级新的空文件
 			try {
 				let newFile = await selfNodeDetail.getFileHandle(newTitle, { create: true });
-				// console.log('newFile', newFile)
+				console.log('newFile', newFile, selfNodeDetail)
+				writableFile(newFile, '新的内容')
+				// 获取草稿文件的句柄
+				// const root = await navigator.storage.getDirectory();
+				// // const root = await selfNodeDetail.getDirectoryHandle()
+				// console.log('draftHandle', root)
+				// // FileSystemFileHandle 
+				// const draftHandle = await root.getFileHandle(newTitle, { create: true });
+				// // 获取同步访问句柄
+				// const accessHandle = await draftHandle.createSyncAccessHandle();
+				// // 获取文件大小
+				// const fileSize = accessHandle.getSize();
+				// // 将文件内容读取到缓冲区
+				// const buffer = new DataView(new ArrayBuffer(fileSize));
+				// const readBuffer = accessHandle.read(buffer, { at: 0 });
+				
+				// // 将消息写入到文件末尾
+				// const encoder = new TextEncoder();
+				// const encodedMessage = encoder.encode('添加的内容');
+				// const writeBuffer = accessHandle.write(encodedMessage, { at: readBuffer });
+
+				// // 将更改持久化至磁盘
+				// accessHandle.flush();
+
+				// // 用完 FileSystemSyncAccessHandle 记得把它关闭
+				// accessHandle.close();
 				result = { status: true, message: '创建成功' }
 			} catch (err) {
-				console.log('createDirectory err', err)
+				log(err)
 				if(err.toString().indexOf('The path supplied exists') !== -1) {
 					result = { status: false, message: '重复命名' }
 				}

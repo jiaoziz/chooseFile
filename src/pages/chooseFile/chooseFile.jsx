@@ -107,7 +107,7 @@ const ChooseFile = (props) => {
 
     // 监听事件
     function eventListener(e) {
-        if (e.target.className.indexOf('menuBoxEvent') === -1) {
+        if (e.target.className.toString().indexOf('menuBoxEvent') === -1) {
             // console.log('mousemove', e.target.className)
             setShowRightMenu(false)
             this.removeEventListener('mousemove', eventListener)
@@ -121,7 +121,7 @@ const ChooseFile = (props) => {
         setRightMenuDetails({
             x: e.event.clientX,
             y: e.event.clientY,
-            isDirectory: e.node.children.length,
+            isDirectory: e.node.type === "directory",
             title: e.node.title,
             parentNodeDetail: e.node.parentNodeDetail,
             selfNodeDetail: e.node.selfNodeDetail

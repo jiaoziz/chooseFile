@@ -1,6 +1,7 @@
 import React from 'react';
 import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import listSlice from './list.js'
+import jtkfSlice from './jtkf.js'
 
 const getDataList = async (data) => {
     return new Promise((res) => {
@@ -17,7 +18,7 @@ export const getData = createAsyncThunk(
     async (data, { dispatch }) => {
         const res = await getDataList(data)
         const p = localStorage.getItem('p')
-        console.log('p', p);
+        // console.log('p', p);
         
 
         const dataArr = []
@@ -96,7 +97,8 @@ export const store = configureStore({
     reducer: {
         count: counterSlice.reducer,
         menu: menuSlice.reducer,
-        list: listSlice.reducer
+        list: listSlice.reducer,
+        jtkf: jtkfSlice.reducer
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({
