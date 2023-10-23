@@ -90,6 +90,10 @@ const AppLayout = (props) => {
     const state = useSelector(s => s.menu.list)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    
+    window.onhashchange = (e) => {
+        console.log('hash change', e)
+    };
 
     // console.log('state', state);
 
@@ -99,6 +103,7 @@ const AppLayout = (props) => {
 
     useEffect(() => {
         dispatch(getData(menuItemsArr))
+        console.log('pathname', window)
     }, [])
 
     // 切换角色
