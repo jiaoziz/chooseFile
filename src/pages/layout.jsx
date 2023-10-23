@@ -17,6 +17,7 @@ import About from './about.jsx'
 import ChooseFile from './chooseFile/chooseFile.jsx'
 import Worker from './testWorker/Worker.jsx'
 import Jtkf from './jtkf/Jtkf.jsx'
+import Mechanical from './mechanical/Mechanical.jsx'
 
 import './layout.css'
 
@@ -51,18 +52,18 @@ const menuItemsArr = [
         icon: CloudOutlined,
         path: '/app',
         label: 'App'
-    },
-    {
-        permission: ['admin', 'user'],
-        icon: CloudOutlined,
-        path: '/chooseFile',
-        label: 'choose转为html文件'
-    },    
+    },   
     {
         permission: ['admin', 'user'],
         icon: CloudOutlined,
         path: '/jtkf',
         label: '客服系统'
+    },
+    {
+        permission: ['admin', 'user'],
+        icon: CloudOutlined,
+        path: '/mechanical',
+        label: '机械列表'
     },
     {
         permission: ['admin', 'user'],
@@ -158,6 +159,7 @@ const AppLayout = (props) => {
                                         <Route path="/chooseFile" element={<ChooseFile />} />
                                         <Route path="/testWorker" element={<Worker />} />
                                         <Route path="/jtkf" element={<Jtkf />} />
+                                        <Route path="/mechanical" element={<Mechanical />} />
                                         <Route path="/" element={<Home />} />
                                     </Routes>
                                 </div>

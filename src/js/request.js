@@ -1,4 +1,7 @@
-const token = `eyJVc2VyTmFtZSI6IuW8oOWbvea1qSIsIlVzZXJJZCI6NDI5LCJSb2xlIjoi6LaF57qn566h55CG5ZGYIiwiUm9sZUlkIjoxMSwiQ29tcGFueUlkIjozLCJXYXJlaG91c2VQb29sSWQiOjUsIlR5cGUiOiJQYyJ9`
+// 客服系统
+const token1 = `eyJVc2VyTmFtZSI6IuW8oOWbvea1qSIsIlVzZXJJZCI6NDI5LCJSb2xlIjoi6LaF57qn566h55CG5ZGYIiwiUm9sZUlkIjoxMSwiQ29tcGFueUlkIjozLCJXYXJlaG91c2VQb29sSWQiOjUsIlR5cGUiOiJQYyJ9`
+// 土建通
+const token2 = 'hrtz4mHVbdx/huRimyiVF6cFsXLDYuds1kPCSi66PrYskBGBDvp3+w=='
 
 // 解析query数据
 function queryParse(query){
@@ -11,7 +14,8 @@ function queryParse(query){
 
 // 解析params数据
 function paramsParse(params){
-    let paramsText = `token=${token}&`
+    // let paramsText = `token=${token2}&`
+    let paramsText = `token=${token2}&`
     for (let key in params) {
         paramsText += `${key}=${params[key]}&`
     }
