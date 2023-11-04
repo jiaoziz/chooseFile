@@ -17,6 +17,7 @@ import About from './about.jsx'
 import ChooseFile from './chooseFile/chooseFile.jsx'
 import Worker from './testWorker/Worker.jsx'
 import Jtkf from './jtkf/Jtkf.jsx'
+import App from './app/App.jsx'
 import Mechanical from './mechanical/Mechanical.jsx'
 
 import './layout.css'
@@ -178,11 +179,7 @@ const Home = () => {
         主页
     </div>
 }
-const App = () => {
-    return <div>
-        APP
-    </div>
-}
+
 const About1 = () => {
     return <div>
         about1

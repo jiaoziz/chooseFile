@@ -3,6 +3,7 @@ import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import listSlice from './list.js'
 import jtkfSlice from './jtkf.js'
 import mechanicalSlice from './mechanical.js'
+import appSlice from './app.js'
 
 const getDataList = async (data) => {
     return new Promise((res) => {
@@ -19,11 +20,7 @@ export const getData = createAsyncThunk(
     async (data, { dispatch }) => {
         const res = await getDataList(data)
         const p = localStorage.getItem('p')
-        // console.log('p', p);
-        
-
         const dataArr = []
-        // debugger
         // 过滤菜单
         const deepItem = (item, type) => {
             let obj = []
@@ -37,7 +34,6 @@ export const getData = createAsyncThunk(
                             children: item.children ? deepItem(item.children, true) : null
                         })
                     } else {
-
                         dataArr.push({
                             key: item.path,
                             icon: React.createElement(item.icon),
@@ -52,9 +48,6 @@ export const getData = createAsyncThunk(
             }
         }
         deepItem(res.data)
-
-        // return   
-
         dispatch({ type: 'menu/add', payload: dataArr })
     }
 )
@@ -100,7 +93,8 @@ export const store = configureStore({
         menu: menuSlice.reducer,
         list: listSlice.reducer,
         jtkf: jtkfSlice.reducer,
-        mechanical: mechanicalSlice.reducer
+        mechanical: mechanicalSlice.reducer,
+        app: appSlice,
     },
     middleware: (getDefaultMiddleware) => {
         return getDefaultMiddleware({

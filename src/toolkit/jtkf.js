@@ -357,7 +357,7 @@ const jtkfSlice = createSlice({
     extraReducers: (b) => {
         b.addCase(submitData.fulfilled, (state, { payload }) => {
             console.log('submitData fulfilled', state, payload)
-        })
+        }) 
         b.addCase(submitData.rejected, (state, { payload }) => {
             console.log('submitData rejected', state, payload)
         })
@@ -394,3 +394,4 @@ console.log('jtkfSlice', jtkfSlice)
 
 export default jtkfSlice;
 export const { save } = jtkfSlice.actions
+
