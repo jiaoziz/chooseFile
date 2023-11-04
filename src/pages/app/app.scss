@@ -30,10 +30,21 @@
 
 .canvasBox {
     display: flex;
-    width: 100px;
+    width: 100%;
     flex-wrap: wrap;
 }
 
 .canvas {
     border: #ccc 1px solid;
+}
+
+.treeInputBox {
+    display: flex;
+    width: 600px;
+    flex-wrap: wrap;
+
+    & > div {
+        width: 200px;
+
+    }
 }

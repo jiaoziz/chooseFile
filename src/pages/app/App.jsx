@@ -33,7 +33,7 @@ const getNextDot = (x, y, lineLength, angle) => {
         nX = x - lineLength; nY = y;
     } else if (angle == 270) {
         nX = x; nY = y + lineLength;
-    } else if (angle == 360) {
+    } else if (angle == 360 || angle == 0) {
         nX = x + lineLength; nY = y;
     }
     // console.log(x, y, lineLength, angle, xLength, yLength, parseInt(nX), -parseInt(nY))
@@ -45,10 +45,31 @@ const rand = (min, max) => min + Math.round((max - min) * Math.random())
 // 正则匹配数字
 const getNumber = (str) => str.match(/\d+/g)
 
+// 16进制转rgb
+const set16ToRgb = (str) => {
+    var reg = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/
+    if(!reg.test(str)){return;}
+    let newStr = (str.toLowerCase()).replace(/\#/g,'')
+    let len = newStr.length;
+    if(len == 3){
+        let t = ''
+        for(var i=0;i<len;i++){
+            t += newStr.slice(i,i+1).concat(newStr.slice(i,i+1))
+        }
+        newStr = t
+    }
+    let arr = []; //将字符串分隔，两个两个的分隔
+    for(var i =0;i<6;i=i+2){
+        let s = newStr.slice(i,i+2)
+        arr.push(parseInt("0x" + s))
+    }
+    return 'rgb(' + arr.join(",")  + ')';
+ }
+
 // 生成各层级的颜色
 const getTreeColor = (tier, color) => {
     const colorArr = []
-    const [color1, color2, color3 ] = getNumber(color)
+    const [color1, color2, color3 ] = getNumber(set16ToRgb(color))
     let step1 =  color1 / tier
     let step2 =  color2 / tier
     let step3 =  color3 / tier
@@ -63,22 +84,32 @@ const getTreeColor = (tier, color) => {
 
 const Canvas = () => {
     const [ctx, setCtx] = useState(null)
+    const [treeData, setTreeData] = useState({
+        originX: 0,// 原点坐标
+        originY: 0,// 原点坐标
+        lineLength: 80, // 树枝长度
+        branchNumber: 2, // 分支个数
+        branchTier: 6, // 分支层数
+        color: '#1c6e31', // 树枝颜色
+        lineWidth: 6, // 树枝粗细程度
+    })
 
-    const draw = (x, y, nextDotX, nextDotY, color) => {
+    const draw = (x, y, nextDotX, nextDotY, color, lineWidth) => {
         // debugger
-        ctx.lineWidth = 3;//设置线条宽度
+        ctx.lineWidth = lineWidth;//设置线条宽度
         ctx.strokeStyle = color;//设置线条颜色
         ctx.beginPath(); // 开始绘制
         //先将笔尖移动到0,0处
         ctx.moveTo(x, y);
         //先将笔滑到下一点处
         ctx.lineTo(nextDotX, nextDotY);
-        ctx.closePath(); // 结束绘制
+        ctx.lineCap = 'round'; // 线条末端样式  butt：线段末端以方形结束 round：线段末端以圆形结束 square：线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
         //执行绘画的动作，如果没有执行stroke函数不会有任何的效果
         ctx.stroke();
+        ctx.closePath(); // 结束绘制
     }
-    // 原点坐标, 分支个数, 分支层数
-    const run = (originX, originY, lineLength, branchNumber, branchTier, color) => {
+    // 原点坐标,树枝长度, 分支个数, 分支层数, 树枝颜色, 树枝粗细程度
+    const run = (originX, originY, lineLength, branchNumber, branchTier, color, lineWidth) => {
         const colorArr = getTreeColor(branchTier, color)
         const dotArr = {
             nowX: originX,
@@ -86,24 +117,26 @@ const Canvas = () => {
             nextX: null,
             nextY: null,
             color: colorArr.pop(),
-            children: []
+            children: [],
+            lineWidth,
         }
         const randAngle = rand(45, 135)
         const nextDot = getNextDot(originX, originY, lineLength, randAngle)
         dotArr.nextX = nextDot.x
         dotArr.nextY = nextDot.y
         
-        const deepData = (origin1X, origin1Y, tier, color) => {
+        const deepData = (origin1X, origin1Y, tier, color, lineWidth) => {
             const newArr = []
             if(tier == 0) return []
             for(let i = 0; i < branchNumber; i++) {
                 let randAngle = 0
-                if(tier > 3) {
+                if(tier > ((branchTier - 2) || 2) ) {
                     randAngle = rand(45, 135)
                 } else {
                     randAngle = rand(0, 180)
                 }
-                const nextLineLength = (lineLength - (lineLength / branchTier / 10) * tier) || 1
+                const nextLineLength = (lineLength - (lineLength / branchTier / 1.5) * (branchTier - tier)) || 1
+                // const nextLineLength = lineLength
                 const nextDot = getNextDot(origin1X, origin1Y, nextLineLength , randAngle)
                 const obj = {
                     randAngle,
@@ -112,27 +145,28 @@ const Canvas = () => {
                     nextX: nextDot.x,
                     nextY: nextDot.y,
                     color: colorArr[tier - 2 ] || 'rgb(255, 0, 0)',
-                    children: deepData(nextDot.x, nextDot.y, tier - 1)
+                    children: deepData(nextDot.x, nextDot.y, tier - 1, '', lineWidth - 1),
+                    lineWidth: lineWidth,
                 }
                 newArr.push(obj)
             }
             return newArr
         }
         // 创建树节点
-        dotArr.children = deepData(nextDot.x, nextDot.y, branchTier)
+        dotArr.children = deepData(nextDot.x, nextDot.y, branchTier, '', lineWidth)
         console.log('dotArr', dotArr)
         // 绘制
         const deepDraw = (obj) => {
             if(obj.children.length == 0) return;
             obj.children.forEach(item => {
                 setTimeout(()=>{
-                    draw(item.nowX, item.nowY, item.nextX, item.nextY, item.color)
+                    draw(item.nowX, item.nowY, item.nextX, item.nextY, item.color, item.lineWidth)
                     deepDraw(item)
 
-                }, 200)
+                }, 100)
             });
         }
-        draw(dotArr.nowX, dotArr.nowY, dotArr.nextX, dotArr.nextY, dotArr.color)
+        draw(dotArr.nowX, dotArr.nowY, dotArr.nextX, dotArr.nextY, dotArr.color, lineWidth)
         deepDraw(dotArr)
     }
     // 清空
@@ -142,15 +176,42 @@ const Canvas = () => {
         ctx.save()
     }
 
+    // 开始绘制
+    const startDraw = () => {
+        clearCanvas()
+        const { originX, originY, lineLength, branchNumber, branchTier, color, lineWidth } = treeData
+        run(originX, originY, lineLength, branchNumber, branchTier, color, lineWidth)
+        // console.log('ctx', ctx)
+    }
+
+    // 修改值
+    const changeTreeValue = (value, key) => {
+        const newData = JSON.parse(JSON.stringify(treeData))
+        newData[key] = value
+        setTreeData(newData)
+    }
+
     useEffect(() => {
         const canvas = document.getElementById('canvas')
         var ctx = canvas.getContext('2d');
         ctx.translate(300, 600)// 原点坐标x, y
         setCtx(ctx)
     }, [])
+
     return <div className="canvasBox">
-        <Button onClick={() => run(0, 0, 50, 2, 8, 'rgb(28, 110, 49)')}>绘制 </Button>
-        <Button onClick={() => clearCanvas()}>清空 </Button>
+        <div style={{width: '100%'}}>
+            <Button onClick={startDraw}>绘制 </Button>
+            <Button onClick={clearCanvas}>清空 </Button>
+        </div>
+        <div className="treeInputBox">
+            <div>原点坐标X:<Input value={treeData.originX} onChange={(e)=>changeTreeValue(e.target.value, 'originX')} type="text" className="treeInput" /></div>
+            <div>原点坐标Y:<Input value={treeData.originY} onChange={(e)=>changeTreeValue(e.target.value, 'originY')} type="text" className="treeInput" /></div>
+            <div>树枝长度:<Input value={treeData.lineLength} onChange={(e)=>changeTreeValue(e.target.value, 'lineLength')} type="text" className="treeInput" /></div>
+            <div>分支个数:<Input value={treeData.branchNumber} onChange={(e)=>changeTreeValue(e.target.value, 'branchNumber')} type="text" className="treeInput" /></div>
+            <div>分支层数:<Input value={treeData.branchTier} onChange={(e)=>changeTreeValue(e.target.value, 'branchTier')} type="text" className="treeInput" /></div>
+            <div>树枝颜色:<input value={treeData.color} onChange={(e)=>changeTreeValue(e.target.value, 'color')} type="color" className="treeInput" /></div>
+            <div>树枝粗细程度 :<Input value={treeData.lineWidth} onChange={(e)=>changeTreeValue(e.target.value, 'lineWidth')} type="text" className="treeInput" /></div>
+        </div>
         <canvas className="canvas" id="canvas" width='600' height='600'></canvas>
     </div>
 }
@@ -185,4 +246,4 @@ const App = () => {
     </>
 }
 
-export default App;
+export default App; 
