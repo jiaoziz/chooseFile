@@ -1,5 +1,5 @@
 const fun =()=> {
-    return new Worker('./myWorker.js')
+    return new Worker('myWorker.js')
 }
 
 export default fun;
