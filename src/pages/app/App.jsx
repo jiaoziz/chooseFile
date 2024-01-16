@@ -90,7 +90,7 @@ const Canvas = () => {
         lineLength: 80, // 树枝长度
         branchNumber: 2, // 分支个数
         branchTier: 6, // 分支层数
-        color: '#1c6e31', // 树枝颜色
+        color: '#6d3d1c', // 树枝颜色
         lineWidth: 6, // 树枝粗细程度
     })
 
@@ -144,7 +144,7 @@ const Canvas = () => {
                     nowY: origin1Y,
                     nextX: nextDot.x,
                     nextY: nextDot.y,
-                    color: colorArr[tier - 2 ] || 'rgb(255, 0, 0)',
+                    color: colorArr[tier - 2 ] || '#1c6e31',
                     children: deepData(nextDot.x, nextDot.y, tier - 1, '', lineWidth - 1),
                     lineWidth: lineWidth,
                 }
@@ -178,7 +178,7 @@ const Canvas = () => {
 
     // 开始绘制
     const startDraw = () => {
-        clearCanvas()
+        // clearCanvas()
         const { originX, originY, lineLength, branchNumber, branchTier, color, lineWidth } = treeData
         run(originX, originY, lineLength, branchNumber, branchTier, color, lineWidth)
         // console.log('ctx', ctx)

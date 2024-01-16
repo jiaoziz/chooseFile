@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button, Tree, message, Input } from "antd";
 import { FolderOutlined, FileOutlined } from '@ant-design/icons'
-import RightMenu from "../rightMenu/rightMenu";
+import RightMenu from "../rightMenu/rightMenu.jsx";
 import hljs from 'highlight.js'
 import 'highlight.js/styles/vs2015.css';
 // import mammoth from 'mammoth'

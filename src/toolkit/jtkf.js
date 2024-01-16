@@ -23,7 +23,10 @@ export const submitData = createAsyncThunk(
 export const getCompanyData = createAsyncThunk(
     'jtkf/getCompanyData',
     async (value, { dispatch, getState }) => {
-        const response = await getCompanyList(value)
+        // const response = await getCompanyList(value)
+        const response = {
+            Result: []
+        }
         return response
     }
 )

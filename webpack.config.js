@@ -34,6 +34,10 @@ module.exports = {
           'sass-loader',
         ],
       },
+      { 
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac|hvc|webp|png)$/,
+        use: 'file-loader' 
+      },
       {
         test: /\.less$/i,
         use: [
@@ -59,6 +63,7 @@ module.exports = {
     open: true,
     port: 3000,
     hot: true,
+    host: '192.168.0.16',
     historyApiFallback: true,
   },
   resolve: {

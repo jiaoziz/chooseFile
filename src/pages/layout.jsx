@@ -19,6 +19,8 @@ import Worker from './testWorker/Worker.jsx'
 import Jtkf from './jtkf/Jtkf.jsx'
 import App from './app/App.jsx'
 import Mechanical from './mechanical/Mechanical.jsx'
+import ThreePage from './threejs/threePage.jsx'
+import ThreePageExercise from './threejs-exercise/threePageExercise.jsx'
 
 import './layout.css'
 
@@ -71,6 +73,18 @@ const menuItemsArr = [
         icon: CloudOutlined,
         path: '/testWorker',
         label: 'testWorker'
+    },
+    {
+        permission: ['admin', 'user'],
+        icon: CloudOutlined,
+        path: '/three',
+        label: 'threeJS'
+    },
+    {
+        permission: ['admin', 'user'],
+        icon: CloudOutlined,
+        path: '/threePageExercise',
+        label: 'three-运动的物体'
     },
     {
         permission: [],
@@ -162,11 +176,14 @@ const AppLayout = (props) => {
                                         <Route path="/jtkf" element={<Jtkf />} />
                                         <Route path="/mechanical" element={<Mechanical />} />
                                         <Route path="/" element={<Home />} />
+                                        <Route path="/three" element={<ThreePage />} />
+                                        <Route path="/threePageExercise" element={<ThreePageExercise />} />
                                     </Routes>
                                 </div>
                             </div>
                             : <Spin />
                     }
+                    <div id='three'></div>
                 </Content>
             </Layout>
         </Layout>
