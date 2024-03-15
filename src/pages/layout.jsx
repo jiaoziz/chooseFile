@@ -94,6 +94,18 @@ const menuItemsArr = [
         label: '扫雷'
     },
     {
+        permission: ['admin', 'user'],
+        icon: CloudOutlined,
+        path: '/three',
+        label: 'threeJS'
+    },
+    {
+        permission: ['admin', 'user'],
+        icon: CloudOutlined,
+        path: '/threePageExercise',
+        label: 'three-运动的物体'
+    },
+    {
         permission: [],
         icon: ShopOutlined,
         path: '/about2',
