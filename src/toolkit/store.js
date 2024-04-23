@@ -1,7 +1,6 @@
 import React from 'react';
 import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import listSlice from './list.js'
-import jtkfSlice from './jtkf.js'
 import mechanicalSlice from './mechanical.js'
 import appSlice from './app.js'
 
@@ -92,7 +91,6 @@ export const store = configureStore({
         count: counterSlice.reducer,
         menu: menuSlice.reducer,
         list: listSlice.reducer,
-        jtkf: jtkfSlice.reducer,
         mechanical: mechanicalSlice.reducer,
         app: appSlice,
     },

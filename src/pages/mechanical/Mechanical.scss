@@ -1,15 +1,16 @@
-.formBox {
-    width: 50%;
-}
+.gridbox {
+    margin: 0 auto;
+    margin-top: 100px;
 
-.xlsxClass {
-    table {
-      border: 1px solid #c9c9c9c9;
-      td {
-        border-left: 1px solid #c9c9c9c9;
-        border-bottom: 1px solid #c9c9c9c9;
-        padding: 3px;
-        min-width: 120px;
-      }
+    & .item-box {
+        display: flex;
     }
-  }
+    
+}
+.item {
+    border: 1px solid rgb(207, 205, 205);
+    width: 50px;
+    aspect-ratio: 1/1;
+    background-color: rgb(236, 232, 232);
+    color: rgb(146, 146, 147);
+}

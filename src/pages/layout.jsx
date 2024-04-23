@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import About from './about.jsx'
 import ChooseFile from './chooseFile/chooseFile.jsx'
 import Worker from './testWorker/Worker.jsx'
-import Jtkf from './jtkf/Jtkf.jsx'
 import App from './app/App.jsx'
 import Mechanical from './mechanical/Mechanical.jsx'
 // import ThreePage from './threejs/threePage.jsx'
@@ -57,12 +56,6 @@ const menuItemsArr = [
         path: '/app',
         label: 'App'
     },   
-    {
-        permission: ['admin', 'user'],
-        icon: CloudOutlined,
-        path: '/jtkf',
-        label: '客服系统'
-    },
     {
         permission: ['admin', 'user'],
         icon: CloudOutlined,
@@ -192,7 +185,6 @@ const AppLayout = (props) => {
                                         <Route path="/app" element={<App />} />
                                         <Route path="/chooseFile" element={<ChooseFile />} />
                                         <Route path="/testWorker" element={<Worker />} />
-                                        <Route path="/jtkf" element={<Jtkf />} />
                                         <Route path="/mechanical" element={<Mechanical />} />
                                         <Route path="/" element={<Home />} />
                                         {/* <Route path="/three" element={<ThreePage />} /> */}

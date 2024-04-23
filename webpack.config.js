@@ -63,7 +63,7 @@ module.exports = {
     open: true,
     port: 3000,
     hot: true,
-    host: '192.168.0.16',
+    host: '127.0.0.1',
     historyApiFallback: true,
   },
   resolve: {
